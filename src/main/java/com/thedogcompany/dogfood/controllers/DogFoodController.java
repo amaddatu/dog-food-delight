@@ -25,7 +25,7 @@ public class DogFoodController {
 
     @GetMapping("/{id}")
     public Optional<DogFood> readDogFood(@PathVariable Long id){
-        return null;
+        return dogFoodService.findById(id);
 
     }
 

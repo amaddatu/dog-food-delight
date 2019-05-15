@@ -5,6 +5,8 @@ import com.thedogcompany.dogfood.repositories.DogFoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DogFoodService {
 
@@ -17,5 +19,8 @@ public class DogFoodService {
 
     public DogFood save(DogFood dogFood){
         return dogFoodRepository.save(dogFood);
+    }
+    public Optional<DogFood> findById(Long id){
+        return dogFoodRepository.findById(id);
     }
 }
