@@ -23,4 +23,12 @@ public class DogFoodService {
     public Optional<DogFood> findById(Long id){
         return dogFoodRepository.findById(id);
     }
+
+    public boolean delete(Long id){
+        if(dogFoodRepository.findById(id).isPresent()){
+            dogFoodRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

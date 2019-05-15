@@ -36,6 +36,7 @@ public class DogFoodController {
 
     @DeleteMapping("/{id}")
     public boolean deleteDogFood(@PathVariable Long id){
-        return false;
+        return dogFoodService.delete(id);
+//        return false;
     }
 }
