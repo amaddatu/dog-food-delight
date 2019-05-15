@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 //import static org.mockito.ArgumentMatchers.any;
@@ -74,10 +76,10 @@ public class DogFoodControllerTests {
 
     @Test
     public void postTest(){
-
+        //Setup
         DogFood dogFood = new DogFood("Kibbles", "Kibbles without the bits");
         DogFood dogFoodExpectedOut = new DogFood(1L, "Kibbles", "Kibbles without the bits");
-        //Setup
+
         given(dogFoodRepository.save( dogFood )).willReturn( dogFoodExpectedOut );
         DogFoodService dbs = new DogFoodService(dogFoodRepository);
         DogFoodController dbc = new DogFoodController(dbs);
@@ -93,6 +95,25 @@ public class DogFoodControllerTests {
         assertEquals(dogFoodOut.getDescription(), dogFoodExpectedOut.getDescription());
 
         //Teardown
+    }
 
+    @Test
+    public void getTest(){
+        DogFood dogFood = new DogFood(1L, "Kibbles", "Kibbles without the bits");
+        Optional<DogFood> dfOptional = Optional.of(dogFood);
+        given(dogFoodRepository.findById( 1L )).willReturn(dfOptional);
+        DogFoodService dbs = new DogFoodService(dogFoodRepository);
+        DogFoodController dbc = new DogFoodController(dbs);
+
+        //Execute
+        Optional<DogFood> dogFoodOut = dbc.readDogFood( 1L );
+
+        //Assert
+        then(dogFoodRepository).should(times(1)).findById(1L);
+        assertEquals(dogFoodOut.get().getId(), dogFood.getId());
+        assertEquals(dogFoodOut.get().getName(), dogFood.getName());
+        assertEquals(dogFoodOut.get().getDescription(), dogFood.getDescription());
+
+        //Teardown
     }
 }

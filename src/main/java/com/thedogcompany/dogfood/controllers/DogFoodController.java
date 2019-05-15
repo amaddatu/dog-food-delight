@@ -5,6 +5,8 @@ import com.thedogcompany.dogfood.services.DogFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/dog-food")
 public class DogFoodController {
@@ -22,7 +24,7 @@ public class DogFoodController {
     }
 
     @GetMapping("/{id}")
-    public DogFood readDogFood(@PathVariable Long id){
+    public Optional<DogFood> readDogFood(@PathVariable Long id){
         return null;
 
     }
