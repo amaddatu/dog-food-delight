@@ -141,4 +141,34 @@ public class DogFoodControllerTests {
 
         //Teardown
     }
+
+    @Test
+    public void updateTest(){
+        DogFood dogFood = new DogFood(1L, "Kibbles", "Kibbles without the bits");
+        DogFood dogFoodChange = new DogFood("Kibbles 2", "Kibbles still does not have bits");
+        DogFood dogFoodFinal = new DogFood(1L, "Kibbles 2", "Kibbles still does not have bits");
+        Optional<DogFood> dfOptional = Optional.of(dogFood);
+        Optional<DogFood> dfOptional2 = Optional.empty();
+        given(dogFoodRepository.findById(1L)).willReturn(dfOptional);
+        given(dogFoodRepository.findById(2L)).willReturn(dfOptional2);
+
+        DogFoodService dbs = new DogFoodService(dogFoodRepository);
+        DogFoodController dbc = new DogFoodController(dbs);
+
+        //Execute
+        Optional<DogFood> foundOut = dbc.updateDogFood( 1L, dogFoodChange );
+        Optional<DogFood> notFoundOut = dbc.updateDogFood( 2L, dogFoodChange);
+
+        //Assert
+        then(dogFoodRepository).should(times(1)).save(dogFoodFinal);
+        then(dogFoodRepository).should(times(1)).findById(1L);
+        then(dogFoodRepository).should(times(1)).findById(2L);
+        assertEquals(foundOut.isPresent(), true);
+        assertEquals(notFoundOut.isPresent(), false);
+        assertEquals(foundOut.get().getId(), dogFood.getId());
+        assertEquals(foundOut.get().getName(), dogFoodChange.getName());
+        assertEquals(foundOut.get().getDescription(), dogFoodChange.getDescription());
+
+        //Teardown
+    }
 }
