@@ -116,4 +116,29 @@ public class DogFoodControllerTests {
 
         //Teardown
     }
+
+    @Test
+    public void deleteTest(){
+        DogFood dogFood = new DogFood(1L, "Kibbles", "Kibbles without the bits");
+        Optional<DogFood> dfOptional = Optional.of(dogFood);
+        Optional<DogFood> dfOptional2 = Optional.of(null);
+        given(dogFoodRepository.findById(1L)).willReturn(dfOptional);
+        given(dogFoodRepository.findById(2L)).willReturn(dfOptional2);
+
+        DogFoodService dbs = new DogFoodService(dogFoodRepository);
+        DogFoodController dbc = new DogFoodController(dbs);
+
+        //Execute
+        boolean bool = dbc.deleteDogFood( 1L );
+        boolean bool2 = dbc.deleteDogFood( 2L );
+
+        //Assert
+        then(dogFoodRepository).should(times(1)).deleteById(1L);
+        then(dogFoodRepository).should(times(1)).findById(1L);
+        then(dogFoodRepository).should(times(1)).findById(2L);
+        assertEquals(bool, true);
+        assertEquals(bool2, false);
+
+        //Teardown
+    }
 }
