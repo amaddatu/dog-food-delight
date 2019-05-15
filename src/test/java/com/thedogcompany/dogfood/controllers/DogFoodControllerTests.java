@@ -121,7 +121,7 @@ public class DogFoodControllerTests {
     public void deleteTest(){
         DogFood dogFood = new DogFood(1L, "Kibbles", "Kibbles without the bits");
         Optional<DogFood> dfOptional = Optional.of(dogFood);
-        Optional<DogFood> dfOptional2 = Optional.of(null);
+        Optional<DogFood> dfOptional2 = Optional.empty();
         given(dogFoodRepository.findById(1L)).willReturn(dfOptional);
         given(dogFoodRepository.findById(2L)).willReturn(dfOptional2);
 
