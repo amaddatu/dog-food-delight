@@ -14,14 +14,5 @@ public class DogFoodRepositoryTests {
     public void contextLoads() {
     }
 
-    @Test
-    public void classTest(){
-        try{
-            Class.forName("com.thedogcompany.dogfood.respositories.DogFoodRepository");
-        }
-        catch(ClassNotFoundException e){
-//            assertTrue(false);
-            fail();
-        }
-    }
+    // Don't really need any tests for interfaces
 }
