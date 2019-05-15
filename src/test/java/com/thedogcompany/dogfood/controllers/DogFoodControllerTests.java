@@ -73,7 +73,7 @@ public class DogFoodControllerTests {
     }
 
     @Test
-    public void saveTest(){
+    public void postTest(){
 
         DogFood dogFood = new DogFood("Kibbles", "Kibbles without the bits");
         DogFood dogFoodExpectedOut = new DogFood(1L, "Kibbles", "Kibbles without the bits");
