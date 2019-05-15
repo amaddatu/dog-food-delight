@@ -31,7 +31,7 @@ public class DogFoodController {
 
     @PutMapping("/{id}")
     public Optional<DogFood> updateDogFood(@PathVariable Long id, @RequestBody DogFood dogFood) {
-        return null;
+        return dogFoodService.update(id, dogFood);
     }
 
     @DeleteMapping("/{id}")

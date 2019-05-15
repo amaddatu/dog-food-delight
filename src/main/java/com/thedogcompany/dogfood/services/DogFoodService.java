@@ -31,4 +31,20 @@ public class DogFoodService {
         }
         return false;
     }
+
+    public Optional<DogFood> update(Long id, DogFood dogFood){
+        Optional<DogFood> dogFoodOptional = dogFoodRepository.findById(id);
+        if(dogFoodOptional.isPresent()){
+            DogFood dogFoodItem = dogFoodOptional.get();
+            if(dogFood.getName() != null){
+                dogFoodItem.setName(dogFood.getName());
+            }
+            if(dogFood.getDescription() != null){
+                dogFoodItem.setDescription(dogFood.getDescription());
+            }
+            dogFoodRepository.save(dogFoodItem);
+            return Optional.of(dogFoodItem);
+        }
+        return Optional.empty();
+    }
 }
