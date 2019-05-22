@@ -23,6 +23,9 @@ public class DogFood {
     private long id;
 
     private String name;
-    private List ingredients;
+
+    @ElementCollection
+    private List<String> ingredients;
+
     private String description;
 }
