@@ -22,6 +22,6 @@ public class DogFood {
     private long id;
 
     private String name;
-
+    private String ingredient;
     private String description;
 }
