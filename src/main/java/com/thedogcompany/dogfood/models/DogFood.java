@@ -13,6 +13,11 @@ import java.util.List;
 @NoArgsConstructor(force = true)
 @Table(name="dogfood")
 public class DogFood {
+    public DogFood(Long id, String name,String description){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
     public DogFood(String name,String description){
         this.name = name;
         this.description = description;
