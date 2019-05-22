@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +23,9 @@ public class DogFood {
     private long id;
 
     private String name;
+
+    @ElementCollection
+    private List<String> ingredients;
 
     private String description;
 }
